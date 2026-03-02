@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+{% block contenido %}
+<h2>taller apps - sobre nosotros</h2>
+<h4>bienvenido a este sitio de taller...</h4>
+{% with messages = get_flashed_messages(with_categories=true) %}
+  {% if messages %}
+    <ul>
+      {% for category, message in messages %}
+        <li class="{{ category }}">{{ message }}</li>
+      {% endfor %}
+    </ul>
+  {% endif %}
+{% endwith %}
+<form action="{{ url_for('sobrenosotros') }}" method="post">
+    {{ form.hidden_tag() }}
+    <p>
+        {{ form.titulo.label }}<br>
+        {{ form.titulo(size=50) }}
+    </p>
+    <p>{{ form.enviar() }}</p>
+</form>
+{% if titulo %}
+    <h3>tarea agregada: {{ titulo }}</h3>
+{% endif %}
+<p><a href="{{ url_for('mostrar_tareas') }}">ver todas las tareas</a></p>
+{% endblock %}
